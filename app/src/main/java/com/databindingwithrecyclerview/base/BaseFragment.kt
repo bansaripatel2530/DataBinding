@@ -31,7 +31,7 @@ abstract class BaseFragment<M : ViewModel, B : ViewDataBinding> : Fragment() {
         binding.setLifecycleOwner(this)
 
         onCreateView(container, savedInstanceState, newsDetailsViewModel as M, binding as B)
-        return view
+        return binding.root
     }
 
     protected abstract fun onCreateView(container: ViewGroup?, savedInstanceState: Bundle?, viewModel: M, binding: B)

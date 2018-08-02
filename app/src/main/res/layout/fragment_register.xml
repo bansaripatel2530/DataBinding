@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/name"
             android:inputType="text"
-            android:text="@{registerViewModel.name}"
+            android:text='@={registerViewModel.name}'
            />
         </android.support.design.widget.TextInputLayout>
 
@@ -49,7 +49,7 @@
             android:layout_marginTop="10dp"
             android:hint="@string/password"
             android:inputType="textPassword"
-            android:text="@{registerViewModel.password}"
+            android:text="@={registerViewModel.password}"
              />
         </android.support.design.widget.TextInputLayout>
 
