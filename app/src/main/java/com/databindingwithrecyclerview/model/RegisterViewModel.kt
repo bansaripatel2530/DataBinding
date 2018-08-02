@@ -33,27 +33,41 @@ class RegisterViewModel : ViewModel() {
         var isValid = true
 
 
-        if (name.value == "") {
-            nameErrorEnable.postValue(true)
-            nameError.postValue("Please enter email")
-            isValid = false
+        when {
+            name.value == "" -> {
+                nameErrorEnable.postValue(true)
+                nameError.postValue("Please enter name")
+                isValid = false
+            }
+            password.value == "" -> {
+                nameErrorEnable.postValue(false)
+                nameError.postValue(null)
+                passwordError.postValue("Please enter password")
+                passwordErrorEnable.postValue(true)
+                isValid = false
+            }
+            password.value!!.length < 8 -> {
+                passwordError.postValue("Password must be 8 character ")
+                passwordErrorEnable.postValue(true)
+            }
+            confirmPassword.value == "" -> {
+                passwordError.postValue(null)
+                passwordErrorEnable.postValue(false)
+                confirmPasswordError.postValue("Please enter confirm password")
+                confirmPasswordErrorEnable.postValue(true)
+                isValid = false
+            }
+            confirmPassword.value != password.value -> {
+                confirmPasswordError.postValue("confirmPassword not match")
+                confirmPasswordErrorEnable.postValue(true)
+                isValid = false
+            }
+            else -> {
+                confirmPasswordError.postValue(null)
+                confirmPasswordErrorEnable.postValue(false)
+                isValid = false
 
-        } else if (password.value == "" || password.value!!.length < 4) {
-            passwordError.postValue("Please enter valid password")
-            passwordErrorEnable.postValue(true)
-            isValid = false
-        } else if (confirmPassword.value == "") {
-            confirmPasswordError.postValue("Please enter confirm password")
-            confirmPasswordErrorEnable.postValue(true)
-            isValid = false
-        } else if (confirmPassword != password) {
-            confirmPasswordError.postValue("confirmPassword not match")
-            confirmPasswordErrorEnable.postValue(true)
-            isValid = false
-
-        } else {
-            confirmPasswordError.postValue(null)
-            confirmPasswordErrorEnable.postValue(false)
+            }
         }
 
 
